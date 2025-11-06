@@ -1,4 +1,5 @@
 [![Documented with Setinstone.io](https://img.shields.io/badge/⛰️Documented%20with-Setinstone.io-success?logo=book&logoColor=white)](https://calendly.com/set-in-stone-thomas-benoit/setinstone-demo)
+[License: MIT](LICENSE) • ![License](https://img.shields.io/badge/License-MIT-green.svg) • ![Last commit](https://img.shields.io/github/last-commit/thomgit9/ottomator-agents) • ![Contributors](https://img.shields.io/github/contributors/thomgit9/ottomator-agents) • ![PRs welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)
 
 # ottomator-agents
 
