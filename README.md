@@ -24,7 +24,7 @@ Node.js 18+ for Next.js-based UIs
 Docker (optional) for container-based agents
 Access keys for LLM providers and services as needed by each agent
 
-###Setup
+### Setup
 
 Clone the repository from https://github.com/thomgit9/ottomator-agents
 Identify the agent you want to run and open its folder
@@ -32,7 +32,7 @@ Copy the provided example environment file to a new .env file and fill required 
 Install dependencies for that agent using its documented package manager
 Use agent-provided scripts to initialize databases or run services if needed
 
-###Configuration
+### Configuration
 Common environment variables used across agents include:
 
 LLM and provider keys such as OPENAI_API_KEY, GEMINI_API_KEY
