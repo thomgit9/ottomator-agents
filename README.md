@@ -16,6 +16,31 @@ This repository includes:
 - Educational examples and implementation blueprints
 - Integration utilities for Supabase, FastAPI, Next.js, Streamlit, and OpenAI/Gemini services
 
+## Getting Starte
+### Prerequisites
+
+Python 3.10+ for Python-based agents
+Node.js 18+ for Next.js-based UIs
+Docker (optional) for container-based agents
+Access keys for LLM providers and services as needed by each agent
+
+###Setup
+
+Clone the repository from https://github.com/thomgit9/ottomator-agents
+Identify the agent you want to run and open its folder
+Copy the provided example environment file to a new .env file and fill required values
+Install dependencies for that agent using its documented package manager
+Use agent-provided scripts to initialize databases or run services if needed
+
+###Configuration
+Common environment variables used across agents include:
+
+LLM and provider keys such as OPENAI_API_KEY, GEMINI_API_KEY
+Vector database, Postgres, or Supabase settings such as DATABASE_URL, SUPABASE_URL, SUPABASE_SERVICE_KEY or SUPABASE_KEY
+Provider-specific values such as BRAVE_API_KEY, searxng base URL, or custom LLM base URL and model selection
+Server tokens or bearer tokens for simple API-level authorization
+Refer to .env.example files in each agent folder for exact names and requirements.
+
 ## Installation
 
 Clone the repository and install dependencies as needed for the agent you want to use.
