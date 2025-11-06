@@ -1,46 +1,92 @@
-# What is the Live Agent Studio?
+[![Documented with Setinstone.io](https://img.shields.io/badge/⛰️Documented%20with-Setinstone.io-success?logo=book&logoColor=white)](https://calendly.com/set-in-stone-thomas-benoit/setinstone-demo)
 
-The [Live Agent Studio](https://studio.ottomator.ai) is a community-driven platform developed by [oTTomator](https://ottomator.ai) for you to explore cutting-edge AI agents and learn how to implement them for yourself or your business! All agents on this platform are open source and, over time, will cover a very large variety of use cases.
+# ottomator-agents
 
-The goal with the studio is to build an educational platform for you to learn how to do incredible things with AI, while still providing practical value so that you’ll want to use the agents just for the sake of what they can do for you!
+## Presentation
 
-This platform is still in beta – expect longer response times under load, a rapidly growing agent library over the coming months, and a lot more content on this platform soon on Cole Medin’s YouTube channel!
+**ottomator-agents** is the official open‑source repository of all AI Agents hosted on the [oTTomator Live Agent Studio](https://studio.ottomator.ai) platform.  
+This repository consolidates every agent workflow, configuration JSON, and related code used within the Live Agent Studio ecosystem, enabling the community to **build, share, and learn from production‑ready AI agents**.
 
-# What is this Repository for?
+The [Live Agent Studio](https://studio.ottomator.ai) is a collaborative environment by [oTTomator](https://ottomator.ai) that empowers developers, creators, and businesses to design, test, and deploy intelligent AI agents across diverse domains — from research assistants to automation workflows.
 
-This repository contains the source code/workflow JSON for all the agents on the Live Agent Studio! Every agent being added to the platform is currently be open sourced here so we can not only create a curated collection of cutting-edge agents together as a community, but also learn from one another!
+This repository includes:
+- Source code for agents and utilities (Python, TypeScript, workflows)
+- Live Studio agent JSON definitions for deployment
+- Educational examples and implementation blueprints
+- Integration utilities for Supabase, FastAPI, Next.js, Streamlit, and OpenAI/Gemini services
 
-## Tokens
+## Installation
 
-Most agents on the Live Agent Studio cost tokens to use, which are purchasable on the platform. However, when you first sign in you are given some tokens to start so you can use the agents free of charge! The biggest reason agents cost tokens is that we pay for the LLM usage since we host all the agents developed by you and the rest of the community!
+Clone the repository and install dependencies as needed for the agent you want to use.
 
-[Purchase Tokens](https://studio.ottomator.ai/pricing)
+```bash
+git clone https://github.com/thomgit9/ottomator-agents.git
+cd ottomator-agents
+```
 
-## Future Plans
+Each agent subfolder contains its own environment files and instructions:
+```bash
+cd ./<agent-folder>
+pip install -r requirements.txt    # for Python-based agents
+```
 
-As the Live Agent Studio develops, it will become the go-to place to stay on top of what is possible with AI agents! Anytime there is a new AI technology, groundbreaking agent research, or a new tool/library to build agents with, it’ll be featured through agents on the platform. It’s a tall order, but we have big plans for the oTTomator community, and we’re confident we can grow to accomplish this!
+For TypeScript or Next.js‑based agents:
+```bash
+cd ./<agent-folder>
+npm install
+```
 
-## FAQ
+Environment variables for connectivity (e.g., `SUPABASE_URL`, `SUPABASE_KEY`, `OPENAI_API_KEY`, or `GEMINI_API_KEY`) are generally defined in each agent’s `.env.example`.
 
-### I want to build an agent to showcase in the Live Agent Studio! How do I do that?
+## Usage
 
-Head on over here to learn how to build an agent for the platform:
+Each agent is independently executable, often exposing REST or CLI endpoints.
 
-[Developer Guide](https://studio.ottomator.ai/guide)
+Example workflows:
+```bash
+# Run an AI Agent via its script
+python agent.py
 
-Also check out [the sample n8n agent](~sample-n8n-agent~) for a starting point of building an n8n agent for the Live Agent Studio, and [the sample Python agent](~sample-python-agent~) for Python.
+# Or launch a FastAPI endpoint
+uvicorn main:app --reload
 
-### How many tokens does it cost to use an agent?
+# For Docker-enabled agents
+docker build -t your-agent .
+docker run -p 8000:8000 your-agent
+```
 
-Each agent will charge tokens per prompt. The number of tokens depends on the agent, as some agents use larger LLMs, some call LLMs multiple times, and some use paid APIs.
+For platform deployment, upload the corresponding agent `.json` to [Live Agent Studio](https://studio.ottomator.ai).
 
-### Where can I go to talk about all these agents and get help implementing them myself?
+Detailed setup and integration steps are referenced in the sub‑repository `README.md` files.
 
-Head on over to our Think Tank community and feel free to make a post!
+## Functions and Classes principales
 
-[Think Tank Community](https://thinktank.ottomator.ai)
+| Name | File | Description | Inputs | Outputs |
+|---|---|---|---|---|
+| `FastAPI(app)` | `TinyDM-agent/main.py` | Initializes TinyDM FastAPI API with Gemini model integration and basic file validation. | HTTP requests | JSON API responses |
+| `FileUpload.validate()` | `TinyDM-agent/main.py` | Checks base64 file payload size before ingestion (limit < 5 MB). | `base64` file string | Boolean |
+| `web_search()` | `python-local-ai-agent/main.py` | Tool for executing web queries through SearxNG and returning summarized search results. | `query` string, search context | Text summary |
+| `Agent` (Pydantic AI) | `python-local-ai-agent/main.py` | Main configured LLM agent for intelligent response generation. | `AgentDeps`, model, prompt | Agent response |
+| `search_knowledge_base()` | `docling-rag-agent/cli.py` | Async function to query vectorized document database using embeddings. | `query` string | Ranked document excerpts |
+| `initialize_db()/close_db()` | `docling-rag-agent/cli.py` | Manage async PostgreSQL connection pool for RAG pipeline. | – | Open/closed connection pool |
+| `CLI.chat()` | `pydantic-github-agent/cli.py` | Interactive GitHub agent terminal interface sending chat prompts via Pydantic‑AI. | User input | Console output with agent responses |
+| `tweet_gen()` | `tweet-generator-agent/main.py` | REST endpoint that generates tweet drafts from latest content sources and saves them in Supabase. | `Agent0Request` payload | JSON confirmation |
+| `load_dotenv()` | multiple modules | Loads environment configuration required for API keys and database URLs. | `.env` file | Environment vars loaded |
+
+## Contributors
+
+- [Cole Medin](https://github.com/coleam00) – Main developer / 88 contributions  
+- [32xnabin](https://github.com/32xnabin) – Contributor / 1 contribution  
+- [Vondert](https://github.com/Vondert) – Contributor / 1 contribution  
+
+## License
+
+This repository is released under the **MIT License**.  
+© 2024 Live Agent Studio and oTTomator. All rights reserved.
 
 ---
 
-&copy; 2024 Live Agent Studio. All rights reserved.  
-Created by oTTomator
+## ⛰️ Documented With SetinStone.io
+ Focus on the only task that matters: building your codebase! With every developer push, Set In Stone’s Mirror Documentation Agent updates your README.md via a pull request — ready for you to review, edit, and approve.
+
+[Book a demo](https://calendly.com/set-in-stone-thomas-benoit/setinstone-demo)
